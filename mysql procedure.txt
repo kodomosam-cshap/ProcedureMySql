@@ -1,0 +1,29 @@
+private void Button1_Click(object sender, EventArgs e)
+{
+
+	try
+	{
+
+		clsConexao conn = new clsConexao();
+
+		MySqlConnection MySqlCon = conn.conectar();
+
+		MySqlCon.Open();
+
+		MySqlCommand mySqlCmd = new MySqlCommand("BookAddOrEdit", MySqlCon);
+		mySqlCmd.CommandType = CommandType.StoredProcedure;
+		mySqlCmd.Parameters.AddWithValue("_BookID", "auto");
+		mySqlCmd.Parameters.AddWithValue("_BookName", "auto");
+		mySqlCmd.Parameters.AddWithValue("_Author", "auto");
+		mySqlCmd.Parameters.AddWithValue("_Description", "auto");
+		mySqlCmd.ExecuteNonQuery();
+
+		MessageBox.Show("Registro inserido com sucesso!");
+
+	}
+	catch (Exception)
+	{
+
+		throw;
+	}
+}
